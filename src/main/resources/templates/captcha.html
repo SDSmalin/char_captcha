@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码</title>
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+<div style="position:relative;" id="codeBox">
+    <img id="charCode" src="captchaImg"/>
+</div>
+<button onclick="getCodeTree();">刷新</button>
+<button onclick="checkCode();">校验</button>
+
+
+<script type="text/javascript">
+    //获取验证码3
+    function getCodeTree() {
+        $("#charCode").attr("src","captchaImg?flag="+Math.random());
+    }
+
+    function checkCode(){
+        var xy = getSelectBoxPosition(document.getElementById('selectBox'));
+        $.ajax({
+            url: 'checkCode',
+            data:{x: xy[0], y: xy[1]},
+            success: function (data) {
+                if(data){
+                    alert('验证成功');
+                }else{
+                    alert('验证错误');
+                }
+            }
+        });
+    }
+
+    //获取选中框的位置
+    function getSelectBoxPosition(obj){
+        return [obj.offsetLeft, obj.offsetTop + 30];
+    }
+
+    //获取纵坐标
+    function getTop(e){
+      var offset=e.offsetTop;
+      if(e.offsetParent!=null) offset+=getTop(e.offsetParent);
+      return offset;
+    }
+
+    //获取横坐标
+    function getLeft(e){
+        var offset=e.offsetLeft;
+        if(e.offsetParent!=null) offset+=getLeft(e.offsetParent);
+        return offset;
+    }
+
+    $(function() {
+        $("#charCode").bind("click", function(event) {
+            var box = document.getElementById("selectBox");
+            if(box){
+                box.parentNode.removeChild(box);
+            }
+            var x = event.clientX; //鼠标点击x坐标
+            var y = event.clientY;  //鼠标点击y坐标
+            var pX = getLeft(this.parentNode); //获取父级元素距离页面边距
+            var pY = getTop(this.parentNode);   //获取父级元素距离页面边距
+            var selectBox = document.createElement("div");
+            selectBox.style.width = '30px';
+            selectBox.style.height = '30px';
+            selectBox.id = 'selectBox';
+            selectBox.style.position = 'absolute';
+            selectBox.style.top = y - 15 - pY + 'px';
+            selectBox.style.left = x - 15 - pX + 'px';
+            selectBox.style.border = 'solid 1px red';
+            document.getElementById('codeBox').appendChild(selectBox);
+        });
+
+    })
+</script>
+</body>
+</html>

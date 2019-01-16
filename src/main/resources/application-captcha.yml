@@ -1,0 +1,13 @@
+captcha:
+  #背景图片宽度(尽量保持与图片大小一致)
+  img-width: 300
+  #背景图片高度(尽量保持与背景图片一致,图片高度减去字体大小)
+  img-height: 220
+  #字体大小
+  font-size: 30
+  #字体浮动范围(字体会随机加减6个像素值)
+  font-range: 6
+  #字体
+  font-family: 楷体
+  #w文字数量
+  font-count: 4
