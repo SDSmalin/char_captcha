@@ -24,8 +24,9 @@ public class LoginController {
     @ResponseBody
     public boolean checkCode(HttpServletRequest request, int x, int y){
         int[] charPositions = (int[]) request.getSession().getAttribute("charPosition");
-        int absX = Math.abs(charPositions[0] - x);
-        int absY = Math.abs(charPositions[1] - y);
+        int absX = Math.abs(charPositions[0] - x); //获取偏差绝对值
+        int absY = Math.abs(charPositions[1] - y);  //获取偏差绝对值
+        //偏差小于字体大小的一半
         if(absX < captchaConfig.getFontSize() / 2 && absY < captchaConfig.getFontSize() / 2){
             return true;
         }else{
