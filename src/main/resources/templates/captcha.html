@@ -41,29 +41,29 @@
 
     //获取纵坐标
     function getTop(e){
-      var offset=e.offsetTop;
+      let offset=e.offsetTop;
       if(e.offsetParent!=null) offset+=getTop(e.offsetParent);
       return offset;
     }
 
     //获取横坐标
     function getLeft(e){
-        var offset=e.offsetLeft;
+        let offset=e.offsetLeft;
         if(e.offsetParent!=null) offset+=getLeft(e.offsetParent);
         return offset;
     }
 
     $(function() {
         $("#charCode").bind("click", function(event) {
-            var box = document.getElementById("selectBox");
+            let box = document.getElementById("selectBox");
             if(box){
                 box.parentNode.removeChild(box);
             }
-            var x = event.clientX; //鼠标点击x坐标
-            var y = event.clientY;  //鼠标点击y坐标
-            var pX = getLeft(this.parentNode); //获取父级元素距离页面边距
-            var pY = getTop(this.parentNode);   //获取父级元素距离页面边距
-            var selectBox = document.createElement("div");
+            let x = event.clientX; //鼠标点击x坐标
+            let y = event.clientY;  //鼠标点击y坐标
+            let pX = getLeft(this.parentNode); //获取父级元素距离页面边距
+            let pY = getTop(this.parentNode);   //获取父级元素距离页面边距
+            let selectBox = document.createElement("div");
             selectBox.style.width = '30px';
             selectBox.style.height = '30px';
             selectBox.id = 'selectBox';
