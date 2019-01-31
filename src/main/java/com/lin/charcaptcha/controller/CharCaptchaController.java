@@ -129,7 +129,7 @@ public class CharCaptchaController {
      * 获取随机颜色
      * @return
      */
-    public Color getRandColor(){
+    private Color getRandColor(){
         Random random = new Random();
         //保证颜色偏深
         int r = random.nextInt(236);
